@@ -1,0 +1,35 @@
+{% extends "layout.html"%}
+{%block head %}
+    <title>{{ listname }}</title>
+    <link rel="stylesheet" href="../static/style.css">
+    
+{%endblock %}
+
+{%block body %}
+    <h2>
+        {{ listname }}
+    </h2>
+    <form action="/editlist/{{ listname}}" method="post">
+        <input autocomplete = "off" autofocus name = "item" type = "text">
+        <button type = "submit">Add Item</button>
+    </form> 
+    <ul>
+        {% for item in list %}
+
+            <div id = "{{item}}" name = {{listname}}>
+                <li> 
+                    <input type="checkbox" value = "{{item}}">
+                    <label for ="{{item}}"> {{item}} </a>
+                    </label>
+                </li>
+            </div>
+        {% endfor %}
+        <li>{%if list%}
+            <button id="to_delete">Delete</button>
+            <script src="/static/delete_items.js"></script>
+        {%endif%}</li>
+    </ul>
+
+    <br>
+    <a class = "end_link" href="/"> All Lists </a>
+{%endblock %}

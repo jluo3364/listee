@@ -1,0 +1,33 @@
+{% extends "layout.html"%}
+{%block head%}
+<link rel="stylesheet" href="../static/style.css">
+        <title>Home</title>
+{%endblock%}
+{%block body%}
+        <form action="/newlist" method="post">
+            <input autocomplete = "off" autofocus name = "name" type = "text">
+            <button type = "submit">New List</button>
+        </form> 
+        <br>
+        {%if lists %}
+            <h2>
+                Lists
+            </h2>
+            </ul>
+                {% for listname in lists %}
+                    
+                    <div id = "{{listname}}">
+                    <li> 
+                        <input type="checkbox" value = "{{listname}}">
+                        <label for ="{{listname}}"> <a href="/editlist/{{ listname}}"> {{listname}} </a>
+                        </label>
+                   
+                    </li>
+                </div>
+                {% endfor %}
+                <br>
+                <button id="to_delete">Delete</button>
+                <script src="/static/delete_lists.js"></script>
+            </ul>
+        {% endif %}
+{%endblock%}
