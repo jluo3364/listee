@@ -10,22 +10,27 @@
         {{ listname }}
     </h2>
     <form action="/editlist/{{ listname}}" method="post">
+        <section>
         <input autocomplete = "off" autofocus name = "item" type = "text">
-        <button type = "submit">Add Item</button>
+        <button type = "submit">Add Item</button> </section>
     </form> 
     <ul>
         {% for item in list %}
 
             <div id = "{{item}}" name = {{listname}}>
                 <li> 
-                    <input type="checkbox" value = "{{item}}">
-                    <label for ="{{item}}"> {{item}} </a>
+                    <input type="checkbox" id = "chbox" value = "{{item}}">
+                    <script>
+                        document.getElementById("chbox").checked = false;
+                    </script>
+                    <label for ="{{item}}"> {{item}}
                     </label>
                 </li>
             </div>
         {% endfor %}
         <li>{%if list%}
-            <button id="to_delete">Delete</button>
+
+            <button id="item_delete">Delete</button>
             <script src="/static/delete_items.js"></script>
         {%endif%}</li>
     </ul>

@@ -10,22 +10,24 @@ def close(conn, cur):
 
 def all_lists():
     conn, cur = open()
-    cur.execute("SELECT list_name FROM lists")
+    cur.execute("SELECT * FROM lists")
     rows = cur.fetchall()
 
     lists = []
     for r in rows:
-        lists.append(r[0])
+        lists.append(r)
+        print(r)
         
     close(conn, cur)
-    return lists
+    return lists #array of tuples: id, name
 
-def delete_lists(lists):
+def delete_lists(ids):
     conn, cur = open()
-    for l in lists:
-        table = list_table_name(l)
-        cur.execute("DROP TABLE IF EXISTS {}".format(table))
-        cur.execute("DELETE FROM lists WHERE list_name = (?)", (l, ))
+    for i in ids:
+        list_table = "l" + str(i)
+        print(list_table)
+        cur.execute("DROP TABLE IF EXISTS {}".format(list_table))
+        cur.execute("DELETE FROM lists WHERE id = (?)", (i, ))
     conn.commit()
     close(conn, cur)
 

@@ -1,6 +1,6 @@
 :root {
-    --color-bg: #7daf98;
-    --color-text-main: #30524e;
+    --color-bg: #427a60;
+    --color-text-main: #c1e4de;
     --color-primary: #e4ffd1;
     --wrapper-height: 87vh;
     --image-max-width: 300px;
@@ -21,6 +21,10 @@
       format("opentype");
   }
 
+#chbox{
+  width: 15px;
+  height: 15px;
+}
 
 body {
     font-family: HK Grotesk;
@@ -33,6 +37,7 @@ li {
     list-style-type: none; /* Remove the bullet points */
     padding: 1% 1%;  
     font-family: inherit;
+    color: var(--color-text-main)
 }
 
 h2{
@@ -40,17 +45,56 @@ h2{
     margin: 1%;
 }
 
-a:link, a:visited{
-    color: var(--color-text-main);
+button {
+  font-size: 100%;
+  background: #d7ddc884;
+  border: 0px solid #1d51394c;
+  box-sizing: border-box;
+  /* border-radius: 4px; */
+  padding: 0.27rem 0.75rem;
+  transition: 400ms ease-out;
+  color: #133e2a;
+  flex:0.5;
+  margin: 1%;
 }
 
-button,
-input {
+#item_delete {
+  margin: 0;
+}
+
+button:hover {
+  background: #d7ddc8cd;
+}
+
+section{
+  display: flex;
+  width: 40%;
+}
+
+input{
+  background: transparent;
+  border-bottom: 1.5px solid #1d5139;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  padding: 0.27rem 0.4rem;
+  color: var(--color-text-main);
   font-size: 100%;
-  background: #FFFFFF;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 0.27rem 0.75rem;
-  transition: 500ms;
+  flex: 1;
+}
+
+.end_link, a.list{
+  background: transparent;
+  border-bottom: 1.5px solid #1d5139;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  padding: 0.2rem 0.7rem;
+  color: var(--color-text-main);
+  font-size: 100%;
+  text-decoration: none;
+}
+
+.end_link:hover, a.list:hover {
+  background: #1d5139;
 }

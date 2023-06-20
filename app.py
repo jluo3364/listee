@@ -18,10 +18,13 @@ def index():
 @app.route("/newlist", methods = ["GET","POST"])
 def new_list():
     list_name = request.form.get("name")
-    
-    name = create_table(list_name)
-    items = get_items(list_name)
-    return render_template("list.html", listname = list_name, list = items)
+    if list_name:
+        name = create_table(list_name)
+        items = get_items(list_name)
+        return render_template("list.html", listname = list_name, list = items)
+    else:
+        redirect("/")
+        return index()
 
 @app.route("/editlist/<list_name>", methods=["GET","POST"])
 def edit_list(list_name):
@@ -33,16 +36,14 @@ def edit_list(list_name):
 
 @app.route("/deletelists", methods = ["POST", "GET"])
 def delete_lists():
-    trash = request.get_json()
+    trash = request.get_json() #list of id's
     db.delete_lists(trash) 
     return render_template("index.html", lists = all_lists())
 
 @app.route("/deleteitems", methods=["GET", "POST"])
 def delete_items():
     trash = request.get_json()
-    print(trash)
     list_name = trash.pop()
-
     items = db.delete_items(list_name, trash) 
     return render_template("list.html", listname = list_name, list = items)
 

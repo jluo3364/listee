@@ -1,27 +1,31 @@
 {% extends "layout.html"%}
 {%block head%}
-<link rel="stylesheet" href="../static/style.css">
-        <title>Home</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Listee</title>
+    <script src="../static/script.js" defer></script>
 {%endblock%}
 {%block body%}
+    
         <form action="/newlist" method="post">
-            <input autocomplete = "off" autofocus name = "name" type = "text">
-            <button type = "submit">New List</button>
-        </form> 
+            <section>
+            <input autocomplete = "off"  name = "name" type = "text">
+            <button type = "submit">New List</button> </section>
+        </form>
         <br>
         {%if lists %}
             <h2>
                 Lists
             </h2>
             </ul>
-                {% for listname in lists %}
-                    
-                    <div id = "{{listname}}">
+                {% for l in lists %}
+                    <!-- l is a tuple: (id, listname) -->
+                    <div id = "{{ l[1] }}">
                     <li> 
-                        <input type="checkbox" value = "{{listname}}">
-                        <label for ="{{listname}}"> <a href="/editlist/{{ listname}}"> {{listname}} </a>
+                        
+                        <input type="checkbox" id = "chbox" value = "{{ l[0] }}">
+                        
+                        <label for ="{{ l[0] }}" id = "label{{l[0]}}"> <a class = "list" href="/editlist/{{ l[1] }}"> {{ l[1]}} </a>
                         </label>
-                   
                     </li>
                 </div>
                 {% endfor %}

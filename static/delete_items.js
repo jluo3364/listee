@@ -1,5 +1,5 @@
 // Get the button element
-const to_delete = document.getElementById('to_delete');
+const to_delete = document.getElementById('item_delete');
 
 // Attach a click event listener to the button
 to_delete.addEventListener('click', function() {
@@ -23,14 +23,14 @@ checkboxes.forEach(function(checkbox) {
     }
 });
 
-trash.push(listname);  //list name is last element of trash array
-
-// Send an HTTP request to the server with the selected values
-fetch('/deleteitems', {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(trash)
-})
+if(trash.length > 0){
+    trash.push(listname);  //list name is last element of trash array
+    fetch('/deleteitems', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(trash)
+    })
+}
 });

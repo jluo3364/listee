@@ -10,14 +10,15 @@ const trash = [];
 
 checkboxes.forEach(function(checkbox) {
     if (checkbox.checked) {
+        console.log(checkbox.value)
         trash.push(checkbox.value); // Add the value to the selectedValues array
-        let element = document.getElementById(`${checkbox.value}`);
-        while (element.firstChild) {
-        element.removeChild(element.firstChild);
-        }
+        let element = document.getElementById(`label${checkbox.value}`);
+        element.parentNode.removeChild(element); //remove label
+        checkbox.parentNode.removeChild(checkbox);
     }
 });
 
+if(trash.length > 0){
 // Send an HTTP request to the server with the selected values
 fetch('/deletelists', {
     method: 'POST',
@@ -25,5 +26,5 @@ fetch('/deletelists', {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify(trash)
-})
+})}
 });
