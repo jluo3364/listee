@@ -31,11 +31,11 @@ def delete_lists(ids):
     conn.commit()
     close(conn, cur)
 
-def delete_items(list_name, items):
+def delete_items(list_name, ids):
     conn, cur = open()
     table_name = list_table_name(list_name)
-    for i in items:
-        cur.execute("DELETE FROM {} WHERE item = ?".format(table_name), (i, ))
+    for i in ids:
+        cur.execute("DELETE FROM {} WHERE item_id = ?".format(table_name), (int(i), ))
     conn.commit()
     close(conn, cur)
     return get_items(list_name)
@@ -43,7 +43,7 @@ def delete_items(list_name, items):
 def insert_item(list_name, item):
     conn, cur = open()
     table_name = list_table_name(list_name)
-    cur.execute("INSERT INTO {} (item) VALUES (?)".format(table_name), (item, ))
+    cur.execute("INSERT INTO {} (item, item_create_time) VALUES (?, datetime('now'))".format(table_name), (item, ))
     conn.commit()
     close(conn, cur)
 
@@ -51,12 +51,12 @@ def get_items(list_name):
     conn, cur = open()
     table_name = list_table_name(list_name)
     
-    sql = "SELECT item FROM {}"
+    sql = "SELECT * FROM {}"
     cur.execute(sql.format(table_name))
     res = cur.fetchall()
     items = []
     for r in res:
-        items.append(r[0])
+        items.append(r)
     close(conn, cur)
     return items
 
@@ -68,8 +68,8 @@ def create_table(list_name):
         id = id[0] + 1
     else:
         id =1
-    cur.execute(" INSERT INTO lists (id, list_name) VALUES (?,?)", (id, list_name) )
-    sql = "CREATE TABLE IF NOT EXISTS {} (item TEXT NOT NULL)"
+    cur.execute(" INSERT INTO lists (id, list_name, create_time) VALUES (?,?, datetime('now'))", (id, list_name) )
+    sql = "CREATE TABLE IF NOT EXISTS {} (item_id INTEGER PRIMARY KEY, item TEXT NOT NULL, item_create_time TIMESTAMP)"  #id, item_str
     name = f"l{id}"
     cur.execute(sql.format(name))  #name = "l"+list_id
     conn.commit()

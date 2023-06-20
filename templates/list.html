@@ -17,13 +17,13 @@
     <ul>
         {% for item in list %}
 
-            <div id = "{{item}}" name = {{listname}}>
+            <div id = "item{{item[0]}}" name = "{{listname}}">
                 <li> 
-                    <input type="checkbox" id = "chbox" value = "{{item}}">
+                    <input type="checkbox" id = "chbox" value = {{item[0]}}>
                     <script>
                         document.getElementById("chbox").checked = false;
                     </script>
-                    <label for ="{{item}}"> {{item}}
+                    <label for ="{{item[0]}}"> {{item[1]}}
                     </label>
                 </li>
             </div>

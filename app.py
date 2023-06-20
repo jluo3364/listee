@@ -7,7 +7,7 @@ import json
 app = Flask(__name__)
 
 conn, cur = open()
-cur.execute("CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY, list_name TEXT NOT NULL)")
+cur.execute("CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY, list_name TEXT NOT NULL, create_time TIMESTAMP)")
 close(conn, cur)
 
 

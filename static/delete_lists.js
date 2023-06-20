@@ -12,9 +12,7 @@ checkboxes.forEach(function(checkbox) {
     if (checkbox.checked) {
         console.log(checkbox.value)
         trash.push(checkbox.value); // Add the value to the selectedValues array
-        let element = document.getElementById(`label${checkbox.value}`);
-        element.parentNode.removeChild(element); //remove label
-        checkbox.parentNode.removeChild(checkbox);
+        checkbox.parentNode.classList.add("deleted");
     }
 });
 

@@ -98,3 +98,7 @@ input{
 .end_link:hover, a.list:hover {
   background: #1d5139;
 }
+
+.deleted{
+  display: none;
+}

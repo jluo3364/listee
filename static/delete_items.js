@@ -13,13 +13,14 @@ var listname = "";
 checkboxes.forEach(function(checkbox) {
     if (checkbox.checked) {
         trash.push(checkbox.value); // Add the value to the selectedValues array
-        let element = document.getElementById(`${checkbox.value}`);
-        
-        listname = element.getAttribute('name');
+        let element = document.getElementById(`item${checkbox.value}`); //get box and label 
+        element.classList.add("deleted");
 
-        while (element.firstChild) {
-        element.removeChild(element.firstChild);
-        }
+        listname = element.getAttribute("name");
+
+        // while (element.firstChild) {
+        // element.removeChild(element.firstChild);
+        // }
     }
 });
 
